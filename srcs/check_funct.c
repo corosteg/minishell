@@ -6,19 +6,22 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/03 18:54:19 by corosteg          #+#    #+#             */
-/*   Updated: 2017/10/11 21:16:38 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/10/17 15:49:39 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env		*create_e_path(char *str)
+t_env		*create_e_path(char *str, int i)
 {
 	char	**tab;
 	t_env	*list;
 	t_env	*retu;
-	int		i;
 
+	while (str[i] == ':')
+		i++;
+	if (str[i] == '\0')
+		return (0);
 	i = 0;
 	tab = ft_strsplit(str, ':');
 	list = (t_env*)malloc(sizeof(t_env));
@@ -48,7 +51,7 @@ t_env		*check_e_path(t_env *list)
 	while (tmp)
 	{
 		if ((!(ft_strncmp(tmp->var, "PATH=", 4))) && tmp->var[5] != '\0')
-			return (create_e_path(ft_strdup(&tmp->var[5])));
+			return (create_e_path(ft_strdup(&tmp->var[5]), 0));
 		tmp = tmp->next;
 	}
 	return (NULL);

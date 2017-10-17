@@ -6,7 +6,7 @@
 /*   By: corosteg <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/11 20:04:00 by corosteg          #+#    #+#             */
-/*   Updated: 2017/10/12 21:26:26 by corosteg         ###   ########.fr       */
+/*   Updated: 2017/10/17 15:51:42 by corosteg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int			check_entry(char **command)
 	while ((ret = read(0, &buf, 1)) && ft_strcmp(buf, "\n"))
 	{
 		buf[ret] = '\0';
+		if (buf[ret - 1] == '\t')
+			buf[ret - 1] = ' ';
 		if (buf[ret - 1] != '\t' && (buf[ret - 1] != ' ' || *command != NULL))
 			*command = ft_strfreejoin(*command, buf, 1);
 	}
@@ -42,7 +44,7 @@ void		exec_com(pid_t father, char **command2, t_env *list)
 			exit(father);
 		}
 	if (tab)
-		free(tab);
+		free_str(tab);
 }
 
 t_env		*check_null(char **command2, pid_t father, t_env *list)
