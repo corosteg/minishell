@@ -19,4 +19,4 @@ Let us therefore write a <b>UNIX</b>-like shell : <b>minishell</b>
 
 ### Installation
 
-$> git clone https://github.com/grumbach/minishell.git && cd minishell && git clone https://github.com/grumbach/libft.git && make && ./minishell
+$> git clone https://github.com/corosteg/minishell.git && cd minishell && make && ./minishell
